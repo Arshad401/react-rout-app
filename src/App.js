@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { MyContext } from './Context/Context';
+import {Routes,Route} from 'react-router-dom'
+import BlogHome from './Blog/BlogHome';
+import AddBlog from './Blog/AddBlog';
+import ViewBlog from './Blog/ViewBlog';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const [title, setTitle]=useState([]);
+return (
+<>
+<MyContext.Provider value={{title,setTitle}}>
+<Routes>
+<Route path="/" element={<BlogHome/>}/>
+<Route path="/blogAdd" element={<AddBlog/>}/>
+<Route path="/Viewblog/:id" element={<ViewBlog/>}/>
+</Routes>
+</MyContext.Provider>
+</>
+);
 }
 
 export default App;
